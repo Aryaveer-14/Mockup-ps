@@ -1,12 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 50">
-  <text
-    x="300" y="40"
-    text-anchor="middle"
-    font-family="'Porsche Next','Futura','Helvetica Neue','Arial Narrow',Arial,sans-serif"
-    font-weight="700"
-    font-size="42"
-    letter-spacing="16"
-    fill="#EDEDE8"
-    style="text-transform:uppercase"
-  >PORSCHE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" fill="#ffffff">
+  <!-- Porsche wordmark — geometric extended sans-serif -->
+  <!-- P -->
+  <path d="M0,20 h28 v160 h-28 v-160z M28,20 h72 q40,0 40,38 v12 q0,38 -40,38 h-72 v-28 h68 q14,0 14,-12 v-8 q0,-12 -14,-12 h-68 v-28z"/>
+  <!-- O -->
+  <path d="M170,20 h100 q40,0 40,38 v64 q0,38 -40,38 h-100 q-40,0 -40,-38 v-64 q0,-38 40,-38z M170,48 q-12,0 -12,12 v60 q0,12 12,12 h100 q12,0 12,-12 v-60 q0,-12 -12,-12 h-100z"/>
+  <!-- R -->
+  <path d="M340,20 h28 v160 h-28 v-160z M368,20 h72 q40,0 40,38 v8 q0,30 -28,36 l38,78 h-30 l-36,-74 h-56 v-28 h68 q14,0 14,-12 v-8 q0,-12 -14,-12 h-68 v-26z"/>
+  <!-- S -->
+  <path d="M500,20 h120 v28 h-120 q-12,0 -12,12 v8 q0,12 12,12 h92 q40,0 40,38 v12 q0,38 -40,38 h-120 v-28 h120 q12,0 12,-12 v-8 q0,-12 -12,-12 h-92 q-40,0 -40,-38 v-12 q0,-38 40,-38z"/>
+  <!-- C -->
+  <path d="M660,20 h140 v28 h-140 q-12,0 -12,12 v60 q0,12 12,12 h140 v28 h-140 q-40,0 -40,-38 v-64 q0,-38 40,-38z"/>
+  <!-- H -->
+  <path d="M830,20 h28 v160 h-28 v-160z M858,78 h84 v28 h-84 v-28z M942,20 h28 v160 h-28 v-160z"/>
+  <!-- E -->
+  <path d="M1010,20 h140 v28 h-112 v38 h90 v28 h-90 v38 h112 v28 h-140 v-160z"/>
 </svg>
