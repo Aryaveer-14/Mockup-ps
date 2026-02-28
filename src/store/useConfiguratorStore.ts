@@ -4,7 +4,7 @@ import { create } from 'zustand';
 
 export type Phase = 'intro' | 'selection' | 'configurator' | 'performance' | 'ar' | 'summary';
 export type CarId = '911' | 'taycan' | 'cayenne';
-export type ConfigStep = 'color' | 'wheels' | 'interior' | 'packages';
+export type ConfigStep = 'color' | 'wheels' | 'packages';
 
 // ─── State Interface ──────────────────────────────────────────────────────────
 
@@ -29,10 +29,6 @@ interface ConfiguratorState {
   isSelecting: boolean;
   setIsSelecting: (v: boolean) => void;
 
-  // Interior view mode
-  viewingInterior: boolean;
-  setViewingInterior: (v: boolean) => void;
-
   // Configurator step
   activeStep: ConfigStep;
   setActiveStep: (step: ConfigStep) => void;
@@ -40,12 +36,10 @@ interface ConfiguratorState {
   // Configuration choices
   selectedColor: string;
   selectedWheels: string;
-  selectedInterior: string;
   selectedPackages: string[];
 
   setColor: (hex: string) => void;
   setWheels: (key: string) => void;
-  setInterior: (key: string) => void;
   togglePackage: (key: string) => void;
 
   // Reset for restart flow
@@ -57,7 +51,6 @@ interface ConfiguratorState {
 const DEFAULT_CONFIG = {
   selectedColor:    '#8A9BB0', // Arctic Silver
   selectedWheels:   'standard',
-  selectedInterior: 'black-leather',
   selectedPackages: [] as string[],
   activeStep:       'color' as ConfigStep,
 };
@@ -90,10 +83,6 @@ export const useConfiguratorStore = create<ConfiguratorState>((set) => ({
   isSelecting: false,
   setIsSelecting: (v) => set({ isSelecting: v }),
 
-  // Interior view mode
-  viewingInterior: false,
-  setViewingInterior: (v) => set({ viewingInterior: v }),
-
   // Configurator step
   activeStep: DEFAULT_CONFIG.activeStep,
   setActiveStep: (step) => set({ activeStep: step }),
@@ -101,12 +90,10 @@ export const useConfiguratorStore = create<ConfiguratorState>((set) => ({
   // Config choices
   selectedColor:    DEFAULT_CONFIG.selectedColor,
   selectedWheels:   DEFAULT_CONFIG.selectedWheels,
-  selectedInterior: DEFAULT_CONFIG.selectedInterior,
   selectedPackages: DEFAULT_CONFIG.selectedPackages,
 
   setColor:    (hex)  => set({ selectedColor: hex }),
   setWheels:   (key)  => set({ selectedWheels: key }),
-  setInterior: (key)  => set({ selectedInterior: key }),
   togglePackage: (key) =>
     set((state) => ({
       selectedPackages: state.selectedPackages.includes(key)
@@ -120,7 +107,6 @@ export const useConfiguratorStore = create<ConfiguratorState>((set) => ({
       phase:         'intro',
       introComplete: false,
       selectedCarId: null,
-      viewingInterior: false,
       ...DEFAULT_CONFIG,
     }),
 }));

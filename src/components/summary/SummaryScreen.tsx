@@ -43,7 +43,6 @@ export default function SummaryScreen() {
     selectedCarId,
     selectedColor,
     selectedWheels,
-    selectedInterior,
     selectedPackages,
     resetConfig,
     setPhase,
@@ -54,9 +53,8 @@ export default function SummaryScreen() {
   const car          = CAR_REGISTRY[selectedCarId];
   const colorOption  = car.colors.find((c) => c.hex === selectedColor);
   const wheelOption  = car.wheels.find((w) => w.key === selectedWheels);
-  const interiorOpt  = car.interiors.find((i) => i.key === selectedInterior);
   const pkgOptions   = car.packages.filter((p) => selectedPackages.includes(p.key));
-  const totalPrice   = computeTotalPrice(car, selectedWheels, selectedInterior, selectedPackages);
+  const totalPrice   = computeTotalPrice(car, selectedWheels, selectedPackages);
 
   return (
     <div className="absolute inset-0 flex">
@@ -125,13 +123,6 @@ export default function SummaryScreen() {
             label="Wheels"
             value={wheelOption?.label ?? '—'}
             price={wheelOption?.price ? `+ ${formatPrice(wheelOption.price)}` : 'Standard'}
-          />
-
-          {/* Interior */}
-          <LineItem
-            label="Interior"
-            value={interiorOpt?.label ?? '—'}
-            price={interiorOpt?.price ? `+ ${formatPrice(interiorOpt.price)}` : 'Included'}
           />
 
           {/* Packages */}

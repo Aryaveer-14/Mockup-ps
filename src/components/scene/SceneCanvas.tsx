@@ -9,6 +9,7 @@
  * - Camera setup lives in CameraRig.
  */
 import { Canvas } from '@react-three/fiber';
+import { ContactShadows } from '@react-three/drei';
 import SceneLighting from './SceneLighting';
 import CameraRig from './CameraRig';
 import ActiveCarModel from './ActiveCarModel';
@@ -36,6 +37,17 @@ export default function SceneCanvas() {
 
       {/* Dynamic camera — lerps to correct position per phase */}
       <CameraRig />
+
+      {/* Soft contact shadows beneath all car models */}
+      <ContactShadows
+        position={[0, -0.01, 0]}
+        opacity={0.45}
+        scale={25}
+        blur={2.5}
+        far={6}
+        resolution={512}
+        color="#000000"
+      />
 
       {/* Ground grid — subtle reference plane, just below car feet */}
       <gridHelper args={[30, 30, '#1C1C1C', '#141414']} position={[0, -0.01, 0]} />

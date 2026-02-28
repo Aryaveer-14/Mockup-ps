@@ -4,14 +4,12 @@
  * Sidebar over 3D scene. Displays StepNavigator + active step content.
  * Shows live price. Navigates to Performance phase.
  */
-import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CAR_REGISTRY, computeTotalPrice, formatPrice } from '@/data/cars';
 import StepNavigator from './StepNavigator';
 import ColorPicker from './ColorPicker';
 import WheelPicker from './WheelPicker';
-import InteriorPicker from './InteriorPicker';
 import PackagePicker from './PackagePicker';
 
 export default function ConfiguratorPanel() {
@@ -20,25 +18,15 @@ export default function ConfiguratorPanel() {
     activeStep,
     selectedColor,
     selectedWheels,
-    selectedInterior,
     selectedPackages,
-    setViewingInterior,
     setPhase,
   } = useConfiguratorStore();
 
-  if (!selectedCarId) return null;
-  const car = CAR_REGISTRY[selectedCarId];
+  const car = selectedCarId ? CAR_REGISTRY[selectedCarId] : null;
 
-  // Automatically enter interior camera view when the Interior tab is active
-  useEffect(() => {
-    if (activeStep === 'interior' && car.hasInterior) {
-      setViewingInterior(true);
-    } else {
-      setViewingInterior(false);
-    }
-  }, [activeStep, car.hasInterior, setViewingInterior]);
+  if (!selectedCarId || !car) return null;
 
-  const totalPrice = computeTotalPrice(car, selectedWheels, selectedInterior, selectedPackages);
+  const totalPrice = computeTotalPrice(car, selectedWheels, selectedPackages);
 
   return (
     <div className="absolute inset-0 pointer-events-none flex">
@@ -92,7 +80,6 @@ export default function ConfiguratorPanel() {
             >
               {activeStep === 'color'    && <ColorPicker />}
               {activeStep === 'wheels'   && <WheelPicker />}
-              {activeStep === 'interior' && <InteriorPicker />}
               {activeStep === 'packages' && <PackagePicker />}
             </motion.div>
           </AnimatePresence>

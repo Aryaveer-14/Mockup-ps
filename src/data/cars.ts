@@ -16,13 +16,6 @@ export interface WheelOption {
   imagePath: string;
 }
 
-export interface InteriorOption {
-  key: string;
-  label: string;
-  price: number;
-  imagePath: string;
-}
-
 export interface Package {
   key: string;
   label: string;
@@ -52,25 +45,16 @@ export interface CarConfig {
   thumbnailPath: string;
   scale: number;       // Uniform 3D scale factor
   defaultColor: string;
-  hasInterior: boolean; // Whether the GLB contains interior geometry
   colors: ColorOption[];
   wheels: WheelOption[];
-  interiors: InteriorOption[];
   packages: Package[];
   performance: PerformanceStat[];
   cameraPreset: CameraPreset;
   selectionCameraPreset: CameraPreset;
-  interiorCameraPreset: CameraPreset;
   wheelsCameraPreset: CameraPreset;
 }
 
 // ─── Shared Options (used across all cars) ────────────────────────────────────
-
-const SHARED_INTERIORS: InteriorOption[] = [
-  { key: 'black-leather',   label: 'Black Leather',      price: 0,    imagePath: '/images/interior-black.webp' },
-  { key: 'cognac-leather',  label: 'Cognac Leather',     price: 3200, imagePath: '/images/interior-cognac.webp' },
-  { key: 'grey-alcantara',  label: 'Grey Alcantara',     price: 5100, imagePath: '/images/interior-alcantara.webp' },
-];
 
 // ─── Car Registry ─────────────────────────────────────────────────────────────
 
@@ -86,7 +70,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/911-thumb.webp',
     scale: 1.0,
     defaultColor: '#8A9BB0',
-    hasInterior: false,
     colors: [
       { key: 'arctic-silver',  label: 'Arctic Silver',    hex: '#8A9BB0', metallic: true },
       { key: 'jet-black',      label: 'Jet Black Meta.',  hex: '#1A1A1A', metallic: true },
@@ -99,7 +82,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       { key: 'sport-design', label: 'Sport Design 21"',    price: 1800, imagePath: '/images/wheel-911-sport.webp' },
       { key: 'exclusive',   label: 'Exclusive Design 21"', price: 3400, imagePath: '/images/wheel-911-exc.webp' },
     ],
-    interiors: SHARED_INTERIORS,
     packages: [
       { key: 'chrono',     label: 'Chrono Package',        description: 'Sport Chrono stopwatch + Sport Plus mode',  price: 2960 },
       { key: 'pasm-sport', label: 'PASM Sport',            description: 'Lowered sport suspension incl. PASM',       price: 2100 },
@@ -122,11 +104,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       target:   [0, 0.5, 0],
       fov: 55,
     },
-    interiorCameraPreset: {
-      position: [0.3, 1.2, 0.4],
-      target:   [0.3, 1.1, 2.0],
-      fov: 75,
-    },
     wheelsCameraPreset: {
       position: [2.8, 0.4, 3.2],
       target:   [1.2, 0.3, 0],
@@ -144,7 +121,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/taycan-thumb.webp',
     scale: 1.0,
     defaultColor: '#1A1A2E',
-    hasInterior: true,
     colors: [
       { key: 'frozen-blue',   label: 'Frozen Blue MG',    hex: '#1A1A2E', metallic: true },
       { key: 'chalk',         label: 'Chalk',             hex: '#D8D4C8', metallic: false },
@@ -157,7 +133,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       { key: 'cross-turismo', label: 'Mission E 21"',      price: 2100, imagePath: '/images/wheel-taycan-mission.webp' },
       { key: 'exclusive',   label: 'Exclusive Design 21"', price: 3100, imagePath: '/images/wheel-taycan-exc.webp' },
     ],
-    interiors: SHARED_INTERIORS,
     packages: [
       { key: 'performance-battery', label: 'Performance Battery+', description: 'Extended 98 kWh battery, 598 km WLTP',  price: 8000 },
       { key: 'innodrive',           label: 'InnoDrive + ACC',      description: 'Predictive cruise control with HD maps',  price: 3950 },
@@ -180,11 +155,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       target:   [0, 0.5, 0],
       fov: 55,
     },
-    interiorCameraPreset: {
-      position: [0.2, 1.0, 0.3],
-      target:   [0.2, 0.9, 2.0],
-      fov: 80,
-    },
     wheelsCameraPreset: {
       position: [2.6, 0.35, 3.0],
       target:   [1.1, 0.3, 0],
@@ -202,7 +172,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/cayenne-thumb.webp',
     scale: 0.92,
     defaultColor: '#4A4A4A',
-    hasInterior: false,
     colors: [
       { key: 'gt-silver',      label: 'GT Silver Meta.',   hex: '#B0B0AA', metallic: true },
       { key: 'jet-black',      label: 'Jet Black Meta.',   hex: '#1A1A1A', metallic: true },
@@ -215,7 +184,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       { key: 'exclusive',   label: 'Exclusive Design 22"', price: 2800, imagePath: '/images/wheel-cayenne-exc.webp' },
       { key: 'gt-rs-spyder', label: 'RS Spyder 22"',       price: 4100, imagePath: '/images/wheel-cayenne-rss.webp' },
     ],
-    interiors: SHARED_INTERIORS,
     packages: [
       { key: 'off-road-design', label: 'Off-Road Design Pkg', description: 'Steel protection bars + mudguards',         price: 3400 },
       { key: 'night-vision',    label: 'Night Vision Assist', description: 'Thermal imaging pedestrian detection',       price: 3520 },
@@ -238,11 +206,6 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       target:   [0, 0.7, 0],
       fov: 58,
     },
-    interiorCameraPreset: {
-      position: [0.3, 1.4, 0.4],
-      target:   [0.3, 1.3, 2.0],
-      fov: 75,
-    },
     wheelsCameraPreset: {
       position: [3.0, 0.5, 3.5],
       target:   [1.3, 0.4, 0],
@@ -261,16 +224,14 @@ export function getCarConfig(id: CarId): CarConfig {
 export function computeTotalPrice(
   car: CarConfig,
   selectedWheels: string,
-  selectedInterior: string,
   selectedPackages: string[]
 ): number {
   const wheelsPrice   = car.wheels.find((w) => w.key === selectedWheels)?.price ?? 0;
-  const interiorPrice = car.interiors.find((i) => i.key === selectedInterior)?.price ?? 0;
   const packagesPrice = selectedPackages.reduce((sum, key) => {
     const pkg = car.packages.find((p) => p.key === key);
     return sum + (pkg?.price ?? 0);
   }, 0);
-  return car.basePrice + wheelsPrice + interiorPrice + packagesPrice;
+  return car.basePrice + wheelsPrice + packagesPrice;
 }
 
 export function formatPrice(eur: number): string {

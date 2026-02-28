@@ -8,7 +8,6 @@ import { useConfiguratorStore, ConfigStep } from '@/store/useConfiguratorStore';
 const STEPS: { key: ConfigStep; label: string }[] = [
   { key: 'color',    label: 'Exterior Color' },
   { key: 'wheels',   label: 'Wheels' },
-  { key: 'interior', label: 'Interior' },
   { key: 'packages', label: 'Packages' },
 ];
 
