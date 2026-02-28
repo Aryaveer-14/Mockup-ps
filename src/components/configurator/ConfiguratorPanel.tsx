@@ -31,12 +31,12 @@ export default function ConfiguratorPanel() {
 
   // Automatically enter interior camera view when the Interior tab is active
   useEffect(() => {
-    if (activeStep === 'interior' && car.hasInterior) {
+    if (activeStep === 'interior') {
       setViewingInterior(true);
     } else {
       setViewingInterior(false);
     }
-  }, [activeStep, car.hasInterior, setViewingInterior]);
+  }, [activeStep, setViewingInterior]);
 
   const totalPrice = computeTotalPrice(car, selectedWheels, selectedInterior, selectedPackages);
 

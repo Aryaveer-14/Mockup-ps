@@ -11,8 +11,61 @@ import { motion } from 'framer-motion';
 import { CAR_REGISTRY, formatPrice } from '@/data/cars';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CarId } from '@/store/useConfiguratorStore';
+import { useRevSound } from '@/hooks/useRevSound';
 
 const CARS = Object.values(CAR_REGISTRY);
+
+/** Speaker icon button — triggers engine rev for one car */
+function RevButton({ carId }: { carId: CarId }) {
+  const { playRev } = useRevSound(carId);
+
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        playRev();
+      }}
+      className="group relative flex items-center justify-center transition-all duration-200"
+      style={{
+        width: 40,
+        height: 40,
+        borderRadius: '50%',
+        border: '1px solid rgba(255,255,255,0.15)',
+        background: 'rgba(255,255,255,0.05)',
+        cursor: 'pointer',
+        marginTop: 8,
+      }}
+      aria-label={`Play ${carId} engine sound`}
+      title="Play engine sound"
+    >
+      {/* Speaker SVG icon */}
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ color: 'rgba(255,255,255,0.6)', transition: 'color 0.2s' }}
+        className="group-hover:!text-[#d4af37]"
+      >
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" />
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+      </svg>
+      {/* Pulse ring on hover */}
+      <span
+        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          border: '1px solid rgba(212,175,55,0.3)',
+          animation: 'pulse 1.5s ease-in-out infinite',
+        }}
+      />
+    </button>
+  );
+}
 
 export default function SelectionScreen() {
   const { hoveredCarId, isSelecting, setSelectedCar, setPhase, setHoveredCar, setIsSelecting } =
@@ -85,12 +138,10 @@ export default function SelectionScreen() {
                 <h2
                   className="font-display transition-colors duration-200"
                   style={{
-                    fontSize: 'var(--text-heading)',
-                    fontWeight: 'var(--fw-bold)',
-                    letterSpacing: 'var(--ls-tight)',
-                    color: isHovered
-                      ? 'var(--color-accent-gold)'
-                      : 'var(--color-text-primary)',
+                    fontSize: '1.75rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    color: isHovered ? '#d4af37' : '#f5f5f5',
                   }}
                 >
                   {car.name}
@@ -100,10 +151,10 @@ export default function SelectionScreen() {
                 <p
                   className="mt-1 transition-opacity duration-200"
                   style={{
-                    fontSize: 'var(--text-label)',
-                    letterSpacing: 'var(--ls-wide)',
-                    color: 'var(--color-text-secondary)',
-                    opacity: isHovered ? 1 : 0.6,
+                    fontSize: '0.8rem',
+                    letterSpacing: '0.06em',
+                    color: '#a0a0a0',
+                    opacity: isHovered ? 1 : 0.7,
                   }}
                 >
                   {car.tagline}
@@ -113,10 +164,10 @@ export default function SelectionScreen() {
                 <p
                   className="mt-2 font-bold transition-opacity duration-200"
                   style={{
-                    fontSize: 'var(--text-body)',
-                    letterSpacing: 'var(--ls-tight)',
-                    color: 'var(--color-text-primary)',
-                    opacity: isHovered ? 1 : 0.5,
+                    fontSize: '1.1rem',
+                    letterSpacing: '0.02em',
+                    color: isHovered ? '#d4af37' : '#f5f5f5',
+                    opacity: isHovered ? 1 : 0.55,
                   }}
                 >
                   {formatPrice(car.basePrice)}
@@ -124,13 +175,17 @@ export default function SelectionScreen() {
 
                 {/* Hover hint line */}
                 <motion.div
-                  className="mt-3 h-px bg-p-gold"
+                  className="mt-3 h-px"
+                  style={{ backgroundColor: '#d4af37' }}
                   initial={{ width: 0 }}
                   animate={{
                     width: isHovered ? 48 : 0,
                     transition: { duration: 0.25, ease: [0, 0, 0.2, 1] },
                   }}
                 />
+
+                {/* Engine rev sound button */}
+                <RevButton carId={car.id} />
               </motion.button>
             );
           })}

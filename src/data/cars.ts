@@ -72,6 +72,13 @@ const SHARED_INTERIORS: InteriorOption[] = [
   { key: 'grey-alcantara',  label: 'Grey Alcantara',     price: 5100, imagePath: '/images/interior-alcantara.webp' },
 ];
 
+/** Interior option key → base color applied to interior meshes */
+export const INTERIOR_COLORS: Record<string, string> = {
+  'black-leather':  '#1A1A1A',
+  'cognac-leather': '#7A4A2A',
+  'grey-alcantara': '#5A5A5A',
+};
+
 // ─── Car Registry ─────────────────────────────────────────────────────────────
 
 export const CAR_REGISTRY: Record<CarId, CarConfig> = {
@@ -86,7 +93,7 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/911-thumb.webp',
     scale: 1.0,
     defaultColor: '#8A9BB0',
-    hasInterior: false,
+    hasInterior: true,
     colors: [
       { key: 'arctic-silver',  label: 'Arctic Silver',    hex: '#8A9BB0', metallic: true },
       { key: 'jet-black',      label: 'Jet Black Meta.',  hex: '#1A1A1A', metallic: true },
@@ -202,7 +209,7 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/cayenne-thumb.webp',
     scale: 0.92,
     defaultColor: '#4A4A4A',
-    hasInterior: false,
+    hasInterior: true,
     colors: [
       { key: 'gt-silver',      label: 'GT Silver Meta.',   hex: '#B0B0AA', metallic: true },
       { key: 'jet-black',      label: 'Jet Black Meta.',   hex: '#1A1A1A', metallic: true },

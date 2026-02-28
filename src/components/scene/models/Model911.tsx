@@ -10,7 +10,7 @@ import { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
-import { CAR_REGISTRY } from '@/data/cars';
+import { CAR_REGISTRY, INTERIOR_COLORS } from '@/data/cars';
 
 const MODEL_PATH = '/models/911.glb';
 const SCALE = CAR_REGISTRY['911'].scale;
@@ -18,12 +18,14 @@ const TARGET_SIZE = 6.5;
 
 const SKIP_KEYWORDS = ['glass', 'window', 'light', 'tire', 'tyre', 'wheel', 'rim', 'chrome', 'rubber', 'interior', 'seat', 'dash', 'sticker', 'plate', 'logo', 'emblem', 'grille', 'grill', 'brake'];
 const BODY_KEYWORDS = ['body', 'paint', 'coat', 'exterior', 'shell', 'door', 'fender', 'hood', 'trunk', 'bumper', 'panel'];
+const INTERIOR_KEYWORDS = ['interior', 'seat', 'dash', 'dashboard', 'leather', 'trim', 'cabin', 'uphol', 'fabric', 'carpet', 'console', 'steering'];
 
 useGLTF.preload(MODEL_PATH);
 
 export default function Model911() {
-  const { selectedColor } = useConfiguratorStore();
+  const { selectedColor, selectedInterior } = useConfiguratorStore();
   const bodyColor = selectedColor || CAR_REGISTRY['911'].defaultColor;
+  const interiorColor = INTERIOR_COLORS[selectedInterior] || INTERIOR_COLORS['black-leather'];
   const groupRef = useRef<THREE.Group>(null);
   const centered = useRef(false);
   const { scene } = useGLTF(MODEL_PATH);
@@ -71,6 +73,21 @@ export default function Model911() {
       }
     });
   }, [scene, bodyColor]);
+
+  // Apply interior color to interior meshes
+  useEffect(() => {
+    if (!scene) return;
+    scene.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+      const mat = child.material as THREE.MeshStandardMaterial;
+      if (!mat?.color) return;
+      const n = (child.name + ' ' + (mat.name || '')).toLowerCase();
+      if (INTERIOR_KEYWORDS.some(kw => n.includes(kw))) {
+        mat.color.set(interiorColor);
+        mat.needsUpdate = true;
+      }
+    });
+  }, [scene, interiorColor]);
 
   // Auto-center and normalize
   useEffect(() => {
