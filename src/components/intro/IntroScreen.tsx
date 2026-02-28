@@ -35,7 +35,7 @@ export default function IntroScreen() {
   return (
     // Full-screen black backdrop
     <motion.div
-      className="absolute inset-0 flex items-center justify-center bg-black"
+      className="absolute inset-0 flex items-center justify-center bg-black z-50"
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.7, ease: [0.4, 0, 1, 1], delay: 0 } }}

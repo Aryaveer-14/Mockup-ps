@@ -21,6 +21,18 @@ interface ConfiguratorState {
   selectedCarId: CarId | null;
   setSelectedCar: (id: CarId) => void;
 
+  // Hover tracking (selection screen)
+  hoveredCarId: CarId | null;
+  setHoveredCar: (id: CarId | null) => void;
+
+  // Selection animation
+  isSelecting: boolean;
+  setIsSelecting: (v: boolean) => void;
+
+  // Interior view mode
+  viewingInterior: boolean;
+  setViewingInterior: (v: boolean) => void;
+
   // Configurator step
   activeStep: ConfigStep;
   setActiveStep: (step: ConfigStep) => void;
@@ -70,6 +82,18 @@ export const useConfiguratorStore = create<ConfiguratorState>((set) => ({
       ...DEFAULT_CONFIG,
     }),
 
+  // Hover tracking
+  hoveredCarId: null,
+  setHoveredCar: (id) => set({ hoveredCarId: id }),
+
+  // Selection animation
+  isSelecting: false,
+  setIsSelecting: (v) => set({ isSelecting: v }),
+
+  // Interior view mode
+  viewingInterior: false,
+  setViewingInterior: (v) => set({ viewingInterior: v }),
+
   // Configurator step
   activeStep: DEFAULT_CONFIG.activeStep,
   setActiveStep: (step) => set({ activeStep: step }),
@@ -96,6 +120,7 @@ export const useConfiguratorStore = create<ConfiguratorState>((set) => ({
       phase:         'intro',
       introComplete: false,
       selectedCarId: null,
+      viewingInterior: false,
       ...DEFAULT_CONFIG,
     }),
 }));

@@ -54,6 +54,7 @@ module.exports = {
           'slow':   '500ms',
           'phase':  '550ms',
         },
+      fontFamily: {
         display: ['"Porsche Next"', '"Arial Narrow"', 'sans-serif'],
         body:    ['Arial', 'Helvetica', 'sans-serif'],
       },

@@ -16,17 +16,18 @@ export default function PerformanceSection() {
   const heroStat = car.performance[0]; // 0–100 km/h is the hero figure
 
   return (
-    <div className="absolute inset-0 flex">
-      {/* Left hero panel */}
-      <motion.div
-        className="
-          w-[420px] h-full flex flex-col justify-between
-          bg-gradient-to-r from-p-bg via-p-bg/98 to-transparent
-          p-10 pt-12
-        "
-        initial={{ x: -40, opacity: 0 }}
-        animate={{ x: 0, opacity: 1, transition: { duration: 0.5, ease: [0, 0, 0.2, 1] } }}
-      >
+    <div className="absolute inset-0 overflow-x-auto overflow-y-auto">
+      <div className="min-w-[740px] w-full h-full relative flex">
+        {/* Left hero panel */}
+        <motion.div
+          className="
+            w-[420px] min-w-[420px] h-full flex flex-col justify-between
+            bg-gradient-to-r from-p-bg via-p-bg/98 to-transparent
+            p-10 pt-12
+          "
+          initial={{ x: -40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1, transition: { duration: 0.5, ease: [0, 0, 0.2, 1] } }}
+        >
         {/* Back nav */}
         <button
           onClick={() => setPhase('configurator')}
@@ -84,10 +85,10 @@ export default function PerformanceSection() {
         </div>
       </motion.div>
 
-      {/* Right stat panel — bottom-right overlay */}
-      <div className="absolute bottom-0 right-0 w-[320px] p-8 pb-10">
+      {/* Right stat panel — flows in the flex row */}
+      <div className="flex-1 min-w-[320px] flex items-end justify-end p-8 pb-10">
         <motion.div
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 w-full max-w-[320px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2, ease: [0, 0, 0.2, 1] } }}
         >
@@ -96,6 +97,7 @@ export default function PerformanceSection() {
             <StatBar key={stat.label} stat={stat} delay={i * 80 + 400} />
           ))}
         </motion.div>
+      </div>
       </div>
     </div>
   );

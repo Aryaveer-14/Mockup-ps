@@ -4,6 +4,7 @@
  * Sidebar over 3D scene. Displays StepNavigator + active step content.
  * Shows live price. Navigates to Performance phase.
  */
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CAR_REGISTRY, computeTotalPrice, formatPrice } from '@/data/cars';
@@ -21,11 +22,21 @@ export default function ConfiguratorPanel() {
     selectedWheels,
     selectedInterior,
     selectedPackages,
+    setViewingInterior,
     setPhase,
   } = useConfiguratorStore();
 
   if (!selectedCarId) return null;
   const car = CAR_REGISTRY[selectedCarId];
+
+  // Automatically enter interior camera view when the Interior tab is active
+  useEffect(() => {
+    if (activeStep === 'interior' && car.hasInterior) {
+      setViewingInterior(true);
+    } else {
+      setViewingInterior(false);
+    }
+  }, [activeStep, car.hasInterior, setViewingInterior]);
 
   const totalPrice = computeTotalPrice(car, selectedWheels, selectedInterior, selectedPackages);
 

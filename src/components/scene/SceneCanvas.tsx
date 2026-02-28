@@ -24,10 +24,10 @@ export default function SceneCanvas() {
         toneMappingExposure: 1.0,
       }}
       camera={{
-        fov:      55,
+        fov:      50,
         near:     0.1,
         far:      200,
-        position: [8, 3, 8],
+        position: [0, 2, 14],
       }}
       style={{ background: '#0A0A0A' }}
     >
@@ -37,8 +37,8 @@ export default function SceneCanvas() {
       {/* Dynamic camera — lerps to correct position per phase */}
       <CameraRig />
 
-      {/* Ground grid — subtle reference plane */}
-      <gridHelper args={[20, 20, '#1C1C1C', '#141414']} position={[0, 0, 0]} />
+      {/* Ground grid — subtle reference plane, just below car feet */}
+      <gridHelper args={[30, 30, '#1C1C1C', '#141414']} position={[0, -0.01, 0]} />
 
       {/* Active car model — swaps based on selectedCarId */}
       <ActiveCarModel />

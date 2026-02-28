@@ -52,6 +52,7 @@ export interface CarConfig {
   thumbnailPath: string;
   scale: number;       // Uniform 3D scale factor
   defaultColor: string;
+  hasInterior: boolean; // Whether the GLB contains interior geometry
   colors: ColorOption[];
   wheels: WheelOption[];
   interiors: InteriorOption[];
@@ -59,6 +60,8 @@ export interface CarConfig {
   performance: PerformanceStat[];
   cameraPreset: CameraPreset;
   selectionCameraPreset: CameraPreset;
+  interiorCameraPreset: CameraPreset;
+  wheelsCameraPreset: CameraPreset;
 }
 
 // ─── Shared Options (used across all cars) ────────────────────────────────────
@@ -83,6 +86,7 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/911-thumb.webp',
     scale: 1.0,
     defaultColor: '#8A9BB0',
+    hasInterior: false,
     colors: [
       { key: 'arctic-silver',  label: 'Arctic Silver',    hex: '#8A9BB0', metallic: true },
       { key: 'jet-black',      label: 'Jet Black Meta.',  hex: '#1A1A1A', metallic: true },
@@ -118,6 +122,16 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       target:   [0, 0.5, 0],
       fov: 55,
     },
+    interiorCameraPreset: {
+      position: [0.3, 1.2, 0.4],
+      target:   [0.3, 1.1, 2.0],
+      fov: 75,
+    },
+    wheelsCameraPreset: {
+      position: [2.8, 0.4, 3.2],
+      target:   [1.2, 0.3, 0],
+      fov: 40,
+    },
   },
 
   'taycan': {
@@ -130,6 +144,7 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/taycan-thumb.webp',
     scale: 1.0,
     defaultColor: '#1A1A2E',
+    hasInterior: true,
     colors: [
       { key: 'frozen-blue',   label: 'Frozen Blue MG',    hex: '#1A1A2E', metallic: true },
       { key: 'chalk',         label: 'Chalk',             hex: '#D8D4C8', metallic: false },
@@ -165,6 +180,16 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       target:   [0, 0.5, 0],
       fov: 55,
     },
+    interiorCameraPreset: {
+      position: [0.2, 1.0, 0.3],
+      target:   [0.2, 0.9, 2.0],
+      fov: 80,
+    },
+    wheelsCameraPreset: {
+      position: [2.6, 0.35, 3.0],
+      target:   [1.1, 0.3, 0],
+      fov: 42,
+    },
   },
 
   'cayenne': {
@@ -177,6 +202,7 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     thumbnailPath: '/images/cayenne-thumb.webp',
     scale: 0.92,
     defaultColor: '#4A4A4A',
+    hasInterior: false,
     colors: [
       { key: 'gt-silver',      label: 'GT Silver Meta.',   hex: '#B0B0AA', metallic: true },
       { key: 'jet-black',      label: 'Jet Black Meta.',   hex: '#1A1A1A', metallic: true },
@@ -211,6 +237,16 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       position: [7, 3, 7],
       target:   [0, 0.7, 0],
       fov: 58,
+    },
+    interiorCameraPreset: {
+      position: [0.3, 1.4, 0.4],
+      target:   [0.3, 1.3, 2.0],
+      fov: 75,
+    },
+    wheelsCameraPreset: {
+      position: [3.0, 0.5, 3.5],
+      target:   [1.3, 0.4, 0],
+      fov: 42,
     },
   },
 

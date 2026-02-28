@@ -1,11 +1,10 @@
 'use client';
 /**
- * Model911 — Porsche 911 Turbo S 3D model.
+ * Model911 — Porsche 911 Carrera 4S realistic 3D model.
  *
- * Swaps color material based on selectedColor in store.
- * If GLB is unavailable, falls back to placeholder geometry.
- *
- * Scale: 1.0 (911 is the reference size)
+ * Loads GLB from /models/911.glb
+ * Applies body color from store to paint/body mesh materials.
+ * No scene cloning — each model component loads its own unique GLB.
  */
 import { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
@@ -15,79 +14,85 @@ import { CAR_REGISTRY } from '@/data/cars';
 
 const MODEL_PATH = '/models/911.glb';
 const SCALE = CAR_REGISTRY['911'].scale;
+const TARGET_SIZE = 6.5;
 
-// Placeholder geometry when model file is not available
-function Placeholder({ color }: { color: string }) {
-  return (
-    <group scale={[SCALE, SCALE, SCALE]}>
-      {/* Body */}
-      <mesh position={[0, 0.48, 0]} castShadow receiveShadow>
-        <boxGeometry args={[1.9, 0.62, 4.3]} />
-        <meshStandardMaterial color={color} metalness={0.6} roughness={0.3} />
-      </mesh>
-      {/* Cabin */}
-      <mesh position={[0, 0.95, 0.3]} castShadow>
-        <boxGeometry args={[1.6, 0.52, 2.0]} />
-        <meshStandardMaterial color={color} metalness={0.5} roughness={0.4} />
-      </mesh>
-      {/* Wheels */}
-      {([[-0.95, 0.24, 1.3], [0.95, 0.24, 1.3], [-0.95, 0.24, -1.3], [0.95, 0.24, -1.3]] as [number,number,number][]).map((pos, i) => (
-        <mesh key={i} position={pos} rotation={[Math.PI / 2, 0, 0]} castShadow>
-          <cylinderGeometry args={[0.24, 0.24, 0.22, 24]} />
-          <meshStandardMaterial color="#1A1A1A" metalness={0.9} roughness={0.1} />
-        </mesh>
-      ))}
-      {/* Shadow plane */}
-      <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[6, 8]} />
-        <shadowMaterial opacity={0.35} />
-      </mesh>
-    </group>
-  );
-}
+const SKIP_KEYWORDS = ['glass', 'window', 'light', 'tire', 'tyre', 'wheel', 'rim', 'chrome', 'rubber', 'interior', 'seat', 'dash', 'sticker', 'plate', 'logo', 'emblem', 'grille', 'grill', 'brake'];
+const BODY_KEYWORDS = ['body', 'paint', 'coat', 'exterior', 'shell', 'door', 'fender', 'hood', 'trunk', 'bumper', 'panel'];
+
+useGLTF.preload(MODEL_PATH);
 
 export default function Model911() {
   const { selectedColor } = useConfiguratorStore();
   const bodyColor = selectedColor || CAR_REGISTRY['911'].defaultColor;
-
-  // Try loading the actual GLB; fall back to placeholder if it fails
-  let gltfResult: ReturnType<typeof useGLTF> | null = null;
-  try {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    gltfResult = useGLTF(MODEL_PATH);
-  } catch {
-    gltfResult = null;
-  }
-
   const groupRef = useRef<THREE.Group>(null);
+  const centered = useRef(false);
+  const { scene } = useGLTF(MODEL_PATH);
 
-  // Apply body color to exterior mesh materials
+  // Enable shadows on all meshes (once)
   useEffect(() => {
-    if (!gltfResult?.scene) return;
-    gltfResult.scene.traverse((child) => {
+    scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        const name = child.name.toLowerCase();
-        if (name.includes('body') || name.includes('paint') || name.includes('exterior')) {
-          const mat = child.material as THREE.MeshStandardMaterial;
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+  }, [scene]);
+
+  // Apply body color
+  useEffect(() => {
+    if (!scene) return;
+    let anyBodyMatch = false;
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        const n = (child.name + ' ' + ((child.material as THREE.Material)?.name || '')).toLowerCase();
+        if (BODY_KEYWORDS.some(kw => n.includes(kw)) && !SKIP_KEYWORDS.some(kw => n.includes(kw))) {
+          anyBodyMatch = true;
+        }
+      }
+    });
+    scene.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+      const mat = child.material as THREE.MeshStandardMaterial;
+      if (!mat?.color) return;
+      const n = (child.name + ' ' + (mat.name || '')).toLowerCase();
+      if (SKIP_KEYWORDS.some(kw => n.includes(kw))) return;
+      if (anyBodyMatch) {
+        if (BODY_KEYWORDS.some(kw => n.includes(kw))) {
+          mat.color.set(bodyColor);
+          mat.needsUpdate = true;
+        }
+      } else {
+        const hsl = { h: 0, s: 0, l: 0 };
+        mat.color.getHSL(hsl);
+        if (hsl.l > 0.15 && hsl.l < 0.95) {
           mat.color.set(bodyColor);
           mat.needsUpdate = true;
         }
       }
     });
-  }, [gltfResult, bodyColor]);
+  }, [scene, bodyColor]);
 
-  if (!gltfResult?.scene) {
-    return <Placeholder color={bodyColor} />;
-  }
+  // Auto-center and normalize
+  useEffect(() => {
+    if (!groupRef.current || centered.current) return;
+    const box = new THREE.Box3().setFromObject(groupRef.current);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    if (maxDim === 0) return;
+    const scaleFactor = TARGET_SIZE / maxDim * SCALE;
+    groupRef.current.scale.setScalar(scaleFactor);
+    groupRef.current.position.set(
+      -center.x * scaleFactor,
+      -box.min.y * scaleFactor,
+      -center.z * scaleFactor,
+    );
+    centered.current = true;
+  }, [scene]);
 
   return (
-    <group ref={groupRef} scale={[SCALE, SCALE, SCALE]} position={[0, 0, 0]}>
-      <primitive object={gltfResult.scene} />
-      {/* Ground shadow plane */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]} receiveShadow>
-        <planeGeometry args={[8, 10]} />
-        <shadowMaterial opacity={0.35} />
-      </mesh>
+    <group ref={groupRef}>
+      <primitive object={scene} />
     </group>
   );
 }
