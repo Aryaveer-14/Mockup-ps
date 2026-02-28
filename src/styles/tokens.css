@@ -1,0 +1,175 @@
+/* ─── Porsche Configurator — Design Tokens ─────────────────────────────────── */
+
+:root {
+  /* Color — Surfaces */
+  --color-bg-primary:    #0A0A0A;
+  --color-bg-elevated:   #141414;
+  --color-bg-overlay:    #1C1C1C;
+  --color-border:        #2A2A2A;
+  --color-border-subtle: #1E1E1E;
+
+  /* Color — Text */
+  --color-text-primary:   #F5F5F0;
+  --color-text-secondary: #A0A09A;
+  --color-text-disabled:  #4A4A44;
+
+  /* Color — Accent */
+  --color-accent-red:  #D5001C;
+  --color-accent-gold: #C9A84C;
+  --color-accent-white: #FFFFFF;
+  --color-selected-bg: rgba(201, 168, 76, 0.12);
+  --color-selected-border: rgba(201, 168, 76, 0.5);
+
+  /* Typography */
+  --font-display: "Porsche Next", "Arial Narrow", Arial, sans-serif;
+  --font-body:    Arial, Helvetica, sans-serif;
+
+  /* Font Sizes */
+  --text-hero:    clamp(3rem, 6vw, 6rem);
+  --text-title:   clamp(1.5rem, 3vw, 2.5rem);
+  --text-heading: 1.25rem;
+  --text-body:    0.9375rem;
+  --text-label:   0.75rem;
+  --text-micro:   0.625rem;
+
+  /* Font Weights */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-bold:    700;
+
+  /* Letter Spacing */
+  --ls-tight:  -0.02em;
+  --ls-normal:  0em;
+  --ls-wide:    0.06em;
+  --ls-wider:   0.12em;
+  --ls-label:   0.10em;
+
+  /* Spacing — 8pt grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Border */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --border-width: 1px;
+
+  /* Transitions */
+  --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in:   cubic-bezier(0.4, 0.0, 1.0, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --duration-micro:      100ms;
+  --duration-fast:       200ms;
+  --duration-normal:     350ms;
+  --duration-slow:       500ms;
+  --duration-phase:      700ms;
+  --duration-camera:    1200ms;
+
+  /* Z-layers */
+  --z-canvas:   0;
+  --z-ui:      10;
+  --z-panel:   20;
+  --z-overlay: 30;
+  --z-modal:   40;
+  --z-intro:   50;
+}
+
+/* ─── Global Reset ────────────────────────────────────────────────────────────*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#__next {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* ─── Utility Classes ─────────────────────────────────────────────────────────*/
+
+.label-caps {
+  font-size: var(--text-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.p-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-accent-white);
+  color: #000;
+  font-family: var(--font-display);
+  font-size: var(--text-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.p-btn-primary:hover {
+  background-color: var(--color-text-primary);
+}
+
+.p-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text-primary);
+  font-size: var(--text-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              color        var(--duration-fast) var(--ease-out);
+}
+.p-btn-ghost:hover {
+  border-color: var(--color-text-secondary);
+  color: var(--color-accent-white);
+}
+
+.p-card {
+  background-color: var(--color-bg-elevated);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.p-card.selected {
+  background-color: var(--color-selected-bg);
+  border-color: var(--color-selected-border);
+}
