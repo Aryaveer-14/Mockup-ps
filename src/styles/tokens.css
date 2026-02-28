@@ -1,36 +1,40 @@
 /* ─── Porsche Configurator — Design Tokens ─────────────────────────────────── */
+/* Aligned with VISUAL_DIRECTION.md — Feb 2026                                  */
 
 :root {
-  /* Color — Surfaces */
-  --color-bg-primary:    #0A0A0A;
-  --color-bg-elevated:   #141414;
-  --color-bg-overlay:    #1C1C1C;
-  --color-border:        #2A2A2A;
-  --color-border-subtle: #1E1E1E;
+  /* Color — Surfaces                                                           */
+  /* Off-black only. Pure #000 used solely in the intro screen.                 */
+  --color-bg-primary:    #0D0D0D;  /* Page base — not pure black                */
+  --color-bg-elevated:   #161616;  /* Cards, inactive panels                    */
+  --color-bg-overlay:    #1E1E1E;  /* Open panels, focused surfaces             */
+  --color-border:        #272727;  /* 1px separators — barely visible           */
+  --color-border-subtle: #1C1C1C;  /* Section dividers within panels            */
 
-  /* Color — Text */
-  --color-text-primary:   #F5F5F0;
-  --color-text-secondary: #A0A09A;
-  --color-text-disabled:  #4A4A44;
+  /* Color — Text                                                               */
+  /* Warm off-whites only. Never #FFFFFF for body text.                         */
+  --color-text-primary:   #EDEDE8; /* Body, active labels, prices               */
+  --color-text-secondary: #8A8A84; /* Metadata, descriptions, inactive tabs     */
+  --color-text-disabled:  #3E3E3A; /* Step counters, ghost states               */
 
-  /* Color — Accent */
-  --color-accent-red:  #D5001C;
-  --color-accent-gold: #C9A84C;
-  --color-accent-white: #FFFFFF;
-  --color-selected-bg: rgba(201, 168, 76, 0.12);
-  --color-selected-border: rgba(201, 168, 76, 0.5);
+  /* Color — Accent                                                             */
+  /* One accent per screen maximum. Red is identity only — never UI chrome.     */
+  --color-accent-red:      #D5001C;              /* Crest only                  */
+  --color-accent-gold:     #C4A24A;              /* Selected states, 1 per screen */
+  --color-accent-white:    #F0F0EC;              /* Primary CTA button fill     */
+  --color-selected-bg:     rgba(196,162,74,0.09); /* Active option background   */
+  --color-selected-border: rgba(196,162,74,0.40); /* Active option border       */
 
-  /* Typography */
+  /* Typography                                                                 */
   --font-display: "Porsche Next", "Arial Narrow", Arial, sans-serif;
   --font-body:    Arial, Helvetica, sans-serif;
 
-  /* Font Sizes */
-  --text-hero:    clamp(3rem, 6vw, 6rem);
-  --text-title:   clamp(1.5rem, 3vw, 2.5rem);
-  --text-heading: 1.25rem;
-  --text-body:    0.9375rem;
-  --text-label:   0.75rem;
-  --text-micro:   0.625rem;
+  /* Font Size Scale                                                            */
+  --text-hero:    clamp(3.5rem, 7vw, 7rem);    /* Stat values, model hero name  */
+  --text-title:   clamp(1.75rem, 3vw, 2.75rem); /* Panel model name, headers    */
+  --text-heading: 1.25rem;                      /* Card titles, active option   */
+  --text-body:    0.9375rem;                    /* 15px — descriptions, labels  */
+  --text-label:   0.6875rem;                    /* 11px — all-caps context      */
+  --text-micro:   0.625rem;                     /* 10px — step numbers, notes   */
 
   /* Font Weights */
   --fw-light:   300;
@@ -38,40 +42,54 @@
   --fw-medium:  500;
   --fw-bold:    700;
 
-  /* Letter Spacing */
-  --ls-tight:  -0.02em;
-  --ls-normal:  0em;
-  --ls-wide:    0.06em;
-  --ls-wider:   0.12em;
-  --ls-label:   0.10em;
+  /* Letter Spacing Philosophy:                                                 */
+  /* Negative tracking: display type only.                                      */
+  /* Positive tracking: all-caps labels only. Never sentence-case body text.    */
+  --ls-hero:   -0.03em;   /* Hero stat values, model names at display size      */
+  --ls-title:  -0.025em;  /* Title-scale headings                               */
+  --ls-tight:  -0.01em;   /* Heading-scale text                                 */
+  --ls-normal:  0em;      /* Body copy — zero tracking                          */
+  --ls-wide:    0.06em;   /* Mid-size labels                                    */
+  --ls-wider:   0.12em;   /* CTA button text                                    */
+  --ls-label:   0.09em;   /* 11px all-caps labels — minimum for legibility      */
 
-  /* Spacing — 8pt grid */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
+  /* Line Heights */
+  --lh-display: 0.9;   /* Hero / title — tight, monolithic                     */
+  --lh-title:   1.1;
+  --lh-heading: 1.3;
+  --lh-body:    1.6;   /* Generous — dark bg needs extra leading                */
+  --lh-label:   1.2;
 
-  /* Border */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --border-width: 1px;
+  /* Spacing — strict 8pt grid. No arbitrary values.                           */
+  --space-1: 4px;   /* Half-unit — inline gaps only                            */
+  --space-2: 8px;   /* Icon-to-label, swatch-to-swatch                         */
+  --space-3: 12px;  /* Internal card padding top/bottom                        */
+  --space-4: 16px;  /* Base component padding                                  */
+  --space-5: 24px;  /* Section internal spacing                                */
+  --space-6: 32px;  /* Between control groups                                  */
+  --space-7: 48px;  /* Panel top/bottom padding                                */
+  --space-8: 64px;  /* Major section gaps                                      */
+  --space-9: 96px;  /* Hero vertical margins                                   */
 
-  /* Transitions */
+  /* Border — 0px radius = confident, not friendly. Max 4px allowed.          */
+  --radius-sm: 0px;   /* Cards, panels, buttons — sharp                        */
+  --radius-md: 2px;   /* Swatches inner, subtle softening                      */
+  --border-width: 1px; /* 1px only — never thicker except focus rings           */
+
+  /* Transitions                                                                */
+  /* enter = ease-out (decelerate). exit = ease-in (accelerate away).          */
   --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
   --ease-in:   cubic-bezier(0.4, 0.0, 1.0, 1);
-  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1); /* Intro elements only           */
 
-  --duration-micro:      100ms;
-  --duration-fast:       200ms;
-  --duration-normal:     350ms;
-  --duration-slow:       500ms;
-  --duration-phase:      700ms;
-  --duration-camera:    1200ms;
+  /* Duration limits — nothing outside camera exceeds 500ms                   */
+  --duration-hover:   120ms;  /* Hover color/border changes                    */
+  --duration-micro:   150ms;  /* Swatch scale, arrow nudge                     */
+  --duration-fast:    250ms;  /* UI element enter/exit                         */
+  --duration-normal:  380ms;  /* Panel slide, phase elements                   */
+  --duration-slow:    500ms;  /* Hard upper limit for non-camera motion        */
+  --duration-phase:   550ms;  /* Full-screen cross-fades                       */
+  --duration-camera: 1300ms;  /* Camera repositioning                          */
 
   /* Z-layers */
   --z-canvas:   0;
@@ -116,60 +134,126 @@ button {
 
 /* ─── Utility Classes ─────────────────────────────────────────────────────────*/
 
+/* ─── Typographic Utilities ──────────────────────────────────────────────────*/
+
+/* All-caps context label — 11px, +0.09em tracking minimum for legibility      */
 .label-caps {
   font-size: var(--text-label);
   font-weight: var(--fw-medium);
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--color-text-secondary);
+  line-height: var(--lh-label);
 }
 
+/* Hero stat value — largest text in the application. Display only.            */
+.text-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-hero);
+  line-height: var(--lh-display);
+  color: var(--color-text-primary);
+}
+
+/* Panel model name / section header                                           */
+.text-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-title);
+  line-height: var(--lh-title);
+  color: var(--color-text-primary);
+}
+
+/* ─── Button System ──────────────────────────────────────────────────────────*/
+
+/*
+  Primary CTA — off-white fill, black text, sharp corners.
+  Height: 48px. No border-radius. No border. No gradient.
+  Hover: slight warm dimming of the fill — not a darken, a tone shift.
+*/
 .p-btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-3) var(--space-6);
-  background-color: var(--color-accent-white);
-  color: #000;
+  height: 48px;
+  padding: 0 var(--space-6);
+  background-color: var(--color-accent-white); /* #F0F0EC */
+  color: #000000;
   font-family: var(--font-display);
   font-size: var(--text-label);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-wider);
   text-transform: uppercase;
-  border-radius: var(--radius-sm);
-  transition: background-color var(--duration-fast) var(--ease-out);
+  border-radius: var(--radius-sm); /* 0px — sharp */
+  border: none;
+  transition: background-color var(--duration-hover) var(--ease-out);
 }
 .p-btn-primary:hover {
-  background-color: var(--color-text-primary);
+  background-color: #DEDEDA; /* Slightly dimmed, not darkened */
+}
+.p-btn-primary:active {
+  background-color: #CECECA;
 }
 
+/*
+  Ghost CTA — transparent, 1px border, text only.
+  Hover: border brightens to secondary text color. Nothing else changes.
+  No fill appears on hover. No scale.
+*/
 .p-btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-3) var(--space-5);
+  height: 48px;
+  padding: 0 var(--space-5);
+  background-color: transparent;
   border: var(--border-width) solid var(--color-border);
   color: var(--color-text-primary);
+  font-family: var(--font-body);
   font-size: var(--text-label);
   font-weight: var(--fw-medium);
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
   border-radius: var(--radius-sm);
-  transition: border-color var(--duration-fast) var(--ease-out),
-              color        var(--duration-fast) var(--ease-out);
+  transition: border-color var(--duration-hover) var(--ease-out),
+              color         var(--duration-hover) var(--ease-out);
 }
 .p-btn-ghost:hover {
   border-color: var(--color-text-secondary);
-  color: var(--color-accent-white);
+  color: #F0F0EC;
+}
+.p-btn-ghost:active {
+  border-color: var(--color-text-primary);
 }
 
+/* ─── Card System ─────────────────────────────────────────────────────────────*/
+
+/*
+  Base card — elevated surface, 1px border, 0px radius.
+  Nothing else. No shadow. No glow.
+*/
 .p-card {
   background-color: var(--color-bg-elevated);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-sm);
 }
 
+/*
+  Selected card state — gold-tinted background + gold border edge.
+  The gold tint is at 9% opacity — barely present. The border does the work.
+*/
 .p-card.selected {
   background-color: var(--color-selected-bg);
   border-color: var(--color-selected-border);
+}
+
+/*
+  Hover state — transition to selected border only.
+  Not the background — that only applies to confirmed selection.
+*/
+.p-card:hover:not(.selected) {
+  border-color: rgba(196, 162, 74, 0.28);
+  transition: border-color var(--duration-hover) var(--ease-out);
 }

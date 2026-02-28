@@ -8,17 +8,52 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'p-bg':       '#0A0A0A',
-        'p-elevated': '#141414',
-        'p-overlay':  '#1C1C1C',
-        'p-border':   '#2A2A2A',
-        'p-text':     '#F5F5F0',
-        'p-muted':    '#A0A09A',
-        'p-disabled': '#4A4A44',
-        'p-red':      '#D5001C',
-        'p-gold':     '#C9A84C',
+        // Aligned with VISUAL_DIRECTION.md — Feb 2026
+        // Off-black surfaces. Pure #000 used only in the intro screen.
+        'p-bg':       '#0D0D0D',
+        'p-elevated': '#161616',
+        'p-overlay':  '#1E1E1E',
+        'p-border':   '#272727',
+        // Warm off-whites. Never #FFFFFF for body text.
+        'p-text':     '#EDEDE8',
+        'p-muted':    '#8A8A84',
+        'p-disabled': '#3E3E3A',
+        // Accents — one per screen maximum
+        'p-red':      '#D5001C', // Crest only — never UI chrome
+        'p-gold':     '#C4A24A', // Selected states only
+        'p-white':    '#F0F0EC', // Primary CTA fill only
       },
-      fontFamily: {
+      // Sharp corners — luxury, not friendly. Max 4px allowed.
+        borderRadius: {
+          'none': '0px',
+          'sm':   '0px',  // default card/button radius
+          'md':   '2px',  // subtle softening (swatches)
+          'lg':   '4px',  // absolute maximum
+          'full': '9999px',
+        },
+        letterSpacing: {
+          'hero':   '-0.03em',
+          'title':  '-0.025em',
+          'tight':  '-0.01em',
+          'normal':  '0em',
+          'wide':    '0.06em',
+          'wider':   '0.12em',
+          'label':   '0.09em',
+        },
+        lineHeight: {
+          'display': '0.9',
+          'heading': '1.3',
+          'body':    '1.6',
+          'label':   '1.2',
+        },
+        transitionDuration: {
+          'hover':  '120ms',
+          'micro':  '150ms',
+          'fast':   '250ms',
+          'normal': '380ms',
+          'slow':   '500ms',
+          'phase':  '550ms',
+        },
         display: ['"Porsche Next"', '"Arial Narrow"', 'sans-serif'],
         body:    ['Arial', 'Helvetica', 'sans-serif'],
       },
