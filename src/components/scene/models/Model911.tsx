@@ -11,8 +11,9 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CAR_REGISTRY } from '@/data/cars';
+import { assetUrl } from '@/lib/basePath';
 
-const MODEL_PATH = '/models/911.glb';
+const MODEL_PATH = assetUrl('/models/911.glb');
 const SCALE = CAR_REGISTRY['911'].scale;
 const TARGET_SIZE = 6.5;
 

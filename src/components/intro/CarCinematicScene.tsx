@@ -16,6 +16,7 @@ import React, { useRef, useEffect, useMemo, Suspense, Component } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { assetUrl } from '@/lib/basePath';
 
 // ─── Timing constants (seconds) ──────────────────────────────────────────────
 
@@ -60,7 +61,7 @@ class ModelErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryStat
 // ─── GLB Car (loaded model) ──────────────────────────────────────────────────
 
 function GlbCar() {
-  const { scene } = useGLTF('/models/911.glb');
+  const { scene } = useGLTF(assetUrl('/models/911.glb'));
   const groupRef = useRef<THREE.Group>(null);
 
   useEffect(() => {

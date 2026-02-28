@@ -9,8 +9,9 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CAR_REGISTRY } from '@/data/cars';
+import { assetUrl } from '@/lib/basePath';
 
-const MODEL_PATH = '/models/cayenne.glb';
+const MODEL_PATH = assetUrl('/models/cayenne.glb');
 const SCALE = CAR_REGISTRY['cayenne'].scale;
 const TARGET_SIZE = 6.5;
 

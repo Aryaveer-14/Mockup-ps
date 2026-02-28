@@ -10,8 +10,9 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CAR_REGISTRY } from '@/data/cars';
+import { assetUrl } from '@/lib/basePath';
 
-const MODEL_PATH = '/models/taycan.glb';
+const MODEL_PATH = assetUrl('/models/taycan.glb');
 const SCALE = CAR_REGISTRY['taycan'].scale;
 const TARGET_SIZE = 6.5;
 

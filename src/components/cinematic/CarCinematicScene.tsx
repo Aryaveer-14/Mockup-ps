@@ -18,9 +18,12 @@ import React, { useRef, useEffect, useMemo, Suspense, Component } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { assetUrl } from '@/lib/basePath';
+
+const MODEL_911 = assetUrl('/models/911.glb');
 
 // Preload so the model is cached before Suspense mounts — prevents fallback flash
-useGLTF.preload('/models/911.glb');
+useGLTF.preload(MODEL_911);
 
 // ─── Timing ──────────────────────────────────────────────────────────────────
 
@@ -80,7 +83,7 @@ class ModelErrorBoundary extends Component<EBProps, EBState> {
 // ─── GLB Car Model ───────────────────────────────────────────────────────────
 
 function GlbCar() {
-  const { scene } = useGLTF('/models/911.glb');
+  const { scene } = useGLTF(MODEL_911);
   const groupRef = useRef<THREE.Group>(null);
 
   useEffect(() => {

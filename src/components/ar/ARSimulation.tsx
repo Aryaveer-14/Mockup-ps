@@ -12,6 +12,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useConfiguratorStore } from '@/store/useConfiguratorStore';
 import { CAR_REGISTRY } from '@/data/cars';
+import { assetUrl } from '@/lib/basePath';
 
 // Dynamically import model-viewer to avoid SSR issues
 function useModelViewer() {
@@ -31,7 +32,7 @@ export default function ARSimulation() {
 
   const car = selectedCarId ? CAR_REGISTRY[selectedCarId] : null;
   const bodyColor = selectedColor || car?.defaultColor || '#888';
-  const modelSrc = car?.modelPath || '/models/911.glb';
+  const modelSrc = car?.modelPath || assetUrl('/models/911.glb');
 
   // Check AR support
   useEffect(() => {

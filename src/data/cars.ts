@@ -1,4 +1,5 @@
 import { CarId } from '@/store/useConfiguratorStore';
+import { assetUrl } from '@/lib/basePath';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -66,8 +67,8 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     fullName: 'Porsche 911 Turbo S',
     tagline: '650 PS · PDK · AWD',
     basePrice: 230700,
-    modelPath: '/models/911.glb',
-    thumbnailPath: '/images/911-thumb.webp',
+    modelPath: assetUrl('/models/911.glb'),
+    thumbnailPath: assetUrl('/images/911-thumb.webp'),
     scale: 1.0,
     defaultColor: '#8A9BB0',
     colors: [
@@ -78,9 +79,9 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       { key: 'python-green',   label: 'Python Green',     hex: '#4A5D3A', metallic: true },
     ],
     wheels: [
-      { key: 'standard',    label: 'Turbo S 21" Standard', price: 0,    imagePath: '/images/wheel-911-std.webp' },
-      { key: 'sport-design', label: 'Sport Design 21"',    price: 1800, imagePath: '/images/wheel-911-sport.webp' },
-      { key: 'exclusive',   label: 'Exclusive Design 21"', price: 3400, imagePath: '/images/wheel-911-exc.webp' },
+      { key: 'standard',    label: 'Turbo S 21" Standard', price: 0,    imagePath: assetUrl('/images/wheel-911-std.webp') },
+      { key: 'sport-design', label: 'Sport Design 21"',    price: 1800, imagePath: assetUrl('/images/wheel-911-sport.webp') },
+      { key: 'exclusive',   label: 'Exclusive Design 21"', price: 3400, imagePath: assetUrl('/images/wheel-911-exc.webp') },
     ],
     packages: [
       { key: 'chrono',     label: 'Chrono Package',        description: 'Sport Chrono stopwatch + Sport Plus mode',  price: 2960 },
@@ -117,8 +118,8 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     fullName: 'Porsche Taycan Turbo',
     tagline: '700 PS · 2-Speed · AWD · 98 kWh',
     basePrice: 185356,
-    modelPath: '/models/taycan.glb',
-    thumbnailPath: '/images/taycan-thumb.webp',
+    modelPath: assetUrl('/models/taycan.glb'),
+    thumbnailPath: assetUrl('/images/taycan-thumb.webp'),
     scale: 1.0,
     defaultColor: '#1A1A2E',
     colors: [
@@ -129,9 +130,9 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       { key: 'mamba-green',   label: 'Mamba Green MG',    hex: '#2D4A35', metallic: true },
     ],
     wheels: [
-      { key: 'standard',    label: 'Turbo 21" Aero',       price: 0,    imagePath: '/images/wheel-taycan-std.webp' },
-      { key: 'cross-turismo', label: 'Mission E 21"',      price: 2100, imagePath: '/images/wheel-taycan-mission.webp' },
-      { key: 'exclusive',   label: 'Exclusive Design 21"', price: 3100, imagePath: '/images/wheel-taycan-exc.webp' },
+      { key: 'standard',    label: 'Turbo 21" Aero',       price: 0,    imagePath: assetUrl('/images/wheel-taycan-std.webp') },
+      { key: 'cross-turismo', label: 'Mission E 21"',      price: 2100, imagePath: assetUrl('/images/wheel-taycan-mission.webp') },
+      { key: 'exclusive',   label: 'Exclusive Design 21"', price: 3100, imagePath: assetUrl('/images/wheel-taycan-exc.webp') },
     ],
     packages: [
       { key: 'performance-battery', label: 'Performance Battery+', description: 'Extended 98 kWh battery, 598 km WLTP',  price: 8000 },
@@ -168,8 +169,8 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
     fullName: 'Porsche Cayenne Turbo GT',
     tagline: '640 PS · Tiptronic S · AWD',
     basePrice: 197056,
-    modelPath: '/models/cayenne.glb',
-    thumbnailPath: '/images/cayenne-thumb.webp',
+    modelPath: assetUrl('/models/cayenne.glb'),
+    thumbnailPath: assetUrl('/images/cayenne-thumb.webp'),
     scale: 0.92,
     defaultColor: '#4A4A4A',
     colors: [
@@ -180,9 +181,9 @@ export const CAR_REGISTRY: Record<CarId, CarConfig> = {
       { key: 'carrara-white',  label: 'Carrara White MG',  hex: '#F0EFEA', metallic: true },
     ],
     wheels: [
-      { key: 'standard',    label: 'GT 22" Standard',      price: 0,    imagePath: '/images/wheel-cayenne-std.webp' },
-      { key: 'exclusive',   label: 'Exclusive Design 22"', price: 2800, imagePath: '/images/wheel-cayenne-exc.webp' },
-      { key: 'gt-rs-spyder', label: 'RS Spyder 22"',       price: 4100, imagePath: '/images/wheel-cayenne-rss.webp' },
+      { key: 'standard',    label: 'GT 22" Standard',      price: 0,    imagePath: assetUrl('/images/wheel-cayenne-std.webp') },
+      { key: 'exclusive',   label: 'Exclusive Design 22"', price: 2800, imagePath: assetUrl('/images/wheel-cayenne-exc.webp') },
+      { key: 'gt-rs-spyder', label: 'RS Spyder 22"',       price: 4100, imagePath: assetUrl('/images/wheel-cayenne-rss.webp') },
     ],
     packages: [
       { key: 'off-road-design', label: 'Off-Road Design Pkg', description: 'Steel protection bars + mudguards',         price: 3400 },
