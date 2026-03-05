@@ -1,0 +1,16 @@
+<svg width="640" height="360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D0D0D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- Cayenne silhouette -->
+  <path d="M 180 195 L 460 195 L 450 180 L 400 170 L 350 165 L 280 163 L 220 167 L 180 180 Z" fill="#B0B0AA" opacity="0.9"/>
+  <path d="M 270 163 L 260 148 L 370 143 L 390 151 L 380 163 Z" fill="#B0B0AA" opacity="0.8"/>
+  <circle cx="240" cy="208" r="20" fill="#1A1A1A"/>
+  <circle cx="420" cy="208" r="20" fill="#1A1A1A"/>
+  <text x="320" y="290" font-family="Arial" font-size="24" font-weight="bold" fill="#EDEDE8" text-anchor="middle">Cayenne Turbo GT</text>
+  <text x="320" y="315" font-family="Arial" font-size="14" fill="#8A8A84" text-anchor="middle">640 PS · Tiptronic S · AWD</text>
+</svg>

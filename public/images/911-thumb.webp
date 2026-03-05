@@ -1,0 +1,16 @@
+<svg width="640" height="360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D0D0D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- 911 silhouette -->
+  <path d="M 180 200 L 460 200 L 450 185 L 400 175 L 350 170 L 280 168 L 220 172 L 180 185 Z" fill="#8A9BB0" opacity="0.9"/>
+  <path d="M 270 168 L 260 155 L 370 150 L 390 158 L 380 168 Z" fill="#8A9BB0" opacity="0.8"/>
+  <circle cx="240" cy="210" r="18" fill="#1A1A1A"/>
+  <circle cx="420" cy="210" r="18" fill="#1A1A1A"/>
+  <text x="320" y="290" font-family="Arial" font-size="24" font-weight="bold" fill="#EDEDE8" text-anchor="middle">911 Turbo S</text>
+  <text x="320" y="315" font-family="Arial" font-size="14" fill="#8A8A84" text-anchor="middle">650 PS · PDK · AWD</text>
+</svg>

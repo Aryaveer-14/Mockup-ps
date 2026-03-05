@@ -54,10 +54,11 @@ module.exports = {
           'slow':   '500ms',
           'phase':  '550ms',
         },
-        display: ['"Porsche Next"', '"Arial Narrow"', 'sans-serif'],
-        body:    ['Arial', 'Helvetica', 'sans-serif'],
-      },
-      animation: {
+        fontFamily: {
+          'display': ['"Porsche Next"', '"Arial Narrow"', 'sans-serif'],
+          'body':    ['Arial', 'Helvetica', 'sans-serif'],
+        },
+        animation: {
         'fade-in':  'fadeIn 0.6s ease-out forwards',
         'fade-out': 'fadeOut 0.5s ease-in forwards',
         'draw-in':  'drawIn 0.8s ease-out forwards',
